@@ -1,0 +1,76 @@
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost:27017'; // Replace with your MongoDB connection string
+const dbName = 'your_database_name';
+const collectionName = 'your_collection_name';
+
+async function updatePreviousMonthData() {
+  const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+  try {
+    await client.connect();
+    console.log('Connected to the database');
+
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Months are 0-based in JavaScript Date object
+
+    const lastMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+    const lastMonthStartDate = new Date(currentYear, lastMonth - 1, 1);
+    const lastMonthEndDate = new Date(currentYear, currentMonth - 1, 0, 23, 59, 59, 999);
+
+    const pipeline = [
+      {
+        $match: {
+          yourDateField: { $gte: lastMonthStartDate, $lte: lastMonthEndDate },
+          // Add other conditions if needed
+        },
+      },
+      {
+        $lookup: {
+          from: collectionName,
+          let: { currentAppId: '$appid' },
+          pipeline: [
+            {
+              $match: {
+                yourDateField: { $gte: currentDate, $lte: new Date(currentYear, currentMonth, 0, 23, 59, 59, 999) },
+                $expr: { $eq: ['$appid', '$$currentAppId'] },
+              },
+            },
+            {
+              $project: {
+                distid: 1,
+                env: 1,
+              },
+            },
+          ],
+          as: 'currentMonthData',
+        },
+      },
+      {
+        $unwind: '$currentMonthData',
+      },
+      {
+        $set: {
+          distid: '$currentMonthData.distid',
+          env: '$currentMonthData.env',
+        },
+      },
+      // Add other pipeline stages as needed
+      // { $project: { ... } },
+      // { $group: { ... } },
+    ];
+
+    const updatedData = await collection.aggregate(pipeline).toArray();
+
+    console.log(`Updated ${updatedData.length} documents for the previous month.`);
+  } finally {
+    await client.close();
+    console.log('Connection closed');
+  }
+}
+
+updatePreviousMonthData();
