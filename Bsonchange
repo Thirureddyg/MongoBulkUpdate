@@ -1,0 +1,94 @@
+using MongoDB.Bson;
+using RiskFirst.Hateoas;
+using System.Collections.Generic;
+using System.Linq;
+
+// Define a custom model representing a BsonDocument
+public class BsonDocumentModel
+{
+    public IDictionary<string, object> Properties { get; set; }
+    // Other properties...
+}
+
+// Define a custom interface for link containers
+public interface IBsonDocumentLinkContainer : ILinkContainer
+{
+    Link[] GetLinks(BsonDocumentModel data, IUrlHelper urlHelper);
+}
+
+// Define a custom implementation of IBsonDocumentLinkContainer for BsonDocumentModel
+public class BsonDocumentModelLinkContainer : IBsonDocumentLinkContainer
+{
+    private readonly IUrlHelper _urlHelper;
+
+    public BsonDocumentModelLinkContainer(IUrlHelper urlHelper)
+    {
+        _urlHelper = urlHelper;
+    }
+
+    public Link[] GetLinks(object data, IUrlHelper urlHelper)
+    {
+        if (data is BsonDocumentModel bsonDocumentModel)
+        {
+            // Define and return HATEOAS links here
+            // Example:
+            return new Link[]
+            {
+                new Link(Link.SelfRel, _urlHelper.RouteUrl("MyRoute", new { id = bsonDocumentModel.Properties["_id"] })),
+                // Add other links as needed
+            };
+        }
+        else
+        {
+            throw new ArgumentException("Invalid data type for link generation.");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Assuming you retrieve a list of BsonDocuments from MongoDB
+        List<BsonDocument> bsonDocuments = GetBsonDocumentsFromMongoDB();
+
+        // Map BsonDocuments to BsonDocumentModels
+        List<BsonDocumentModel> bsonDocumentModels = bsonDocuments
+            .Select(doc => new BsonDocumentModel { Properties = doc.ToDictionary() })
+            .ToList();
+
+        // Inject ILinksService and IUrlHelper as needed
+        ILinksService linksService = GetLinksService();
+        IUrlHelper urlHelper = GetUrlHelper();
+
+        // Create HateoasResponse with BsonDocumentModels
+        var response = new HateoasResponse<IEnumerable<BsonDocumentModel>>(
+            bsonDocumentModels,
+            new BsonDocumentModelLinkContainer(urlHelper)); // Provide the link container
+
+        // Add links using ILinksService
+        linksService.AddLinks(response);
+    }
+
+    static List<BsonDocument> GetBsonDocumentsFromMongoDB()
+    {
+        // Implement logic to retrieve BsonDocuments from MongoDB
+        // This could involve using MongoDB.Driver to query the database
+        // Return a list of BsonDocuments
+        return new List<BsonDocument>();
+    }
+
+    static ILinksService GetLinksService()
+    {
+        // Implement logic to get ILinksService
+        // Example:
+        return new DefaultLinksService();
+    }
+
+    static IUrlHelper GetUrlHelper()
+    {
+        // Implement logic to get IUrlHelper
+        // Example:
+        return new UrlHelper();
+    }
+}
