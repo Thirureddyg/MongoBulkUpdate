@@ -1,0 +1,15 @@
+When providing feedback on an interview for Terraform, Azure Cloud, and Infrastructure as Code (IAC) pipeline skills, consider the following points:
+
+1. **Technical Proficiency**: Evaluate the candidate's understanding of Terraform and Azure Cloud, including their ability to create, manage, and deploy infrastructure using Terraform scripts. Assess their knowledge of Azure services and how they integrate with Terraform.
+
+2. **Problem-solving Skills**: Look at how the candidate approached technical challenges related to infrastructure provisioning, configuration management, and automation. Evaluate their ability to troubleshoot and debug issues within Terraform scripts and Azure resources.
+
+3. **Best Practices**: Consider whether the candidate follows best practices for infrastructure as code, such as modularization, version control, and code reuse. Assess their understanding of Terraform modules, remote state management, and Azure Resource Manager templates.
+
+4. **IAC Pipeline**: Evaluate the candidate's experience with setting up and managing infrastructure as code pipelines. This includes familiarity with continuous integration/continuous deployment (CI/CD) processes, tools like Azure DevOps or GitHub Actions, and automated testing of infrastructure changes.
+
+5. **Communication Skills**: Assess the candidate's ability to effectively communicate technical concepts, discuss their approach to solving problems, and articulate their experience with Terraform, Azure Cloud, and IAC pipelines.
+
+6. **Learning and Growth**: Consider the candidate's willingness and ability to learn new technologies and adapt to changing requirements in the cloud infrastructure space.
+
+Provide constructive feedback on areas where the candidate excelled and areas where they can improve, highlighting specific examples from the interview discussion or technical assessments. Offer recommendations for further learning or skill development if necessary.
