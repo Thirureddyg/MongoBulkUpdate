@@ -1,0 +1,27 @@
+
+	1.	Use Role-Based Access Control (RBAC):
+	•	RBAC allows you to grant permissions to users, groups, and applications based on their roles, making it easier to manage access to Azure resources.
+	•	Assign users the lowest privilege level necessary to perform their tasks to minimize the risk of unauthorized access.
+	•	Regularly review and audit role assignments to ensure they align with least privilege principles and organizational policies.
+	2.	Implement Multi-Factor Authentication (MFA):
+	•	Enable MFA for all user accounts to add an extra layer of security and mitigate the risk of unauthorized access due to compromised credentials.
+	•	Azure Active Directory (AD) supports various MFA methods, including phone call, text message, mobile app, and hardware token authentication.
+	3.	Centralize Identity Management with Azure AD:
+	•	Azure AD serves as the identity and access management service for Azure, providing features such as single sign-on (SSO), identity protection, and conditional access.
+	•	Integrate Azure AD with your on-premises Active Directory environment using Azure AD Connect for seamless authentication and access control across cloud and on-premises resources.
+	4.	Enforce Least Privilege Access:
+	•	Follow the principle of least privilege by granting users and applications only the permissions they need to perform their intended tasks.
+	•	Regularly review and update access permissions to remove unnecessary privileges and minimize the attack surface.
+	5.	Enable Azure AD Privileged Identity Management (PIM):
+	•	Azure AD PIM provides just-in-time privileged access to Azure resources, allowing users to elevate their permissions for a specified duration when needed.
+	•	Enable PIM for privileged roles and require users to request and justify elevated access, reducing the risk of unauthorized or prolonged privileged access.
+	6.	Implement Resource Locks:
+	•	Use resource locks to prevent accidental deletion or modification of critical Azure resources.
+	•	Apply read-only or delete locks to prevent unauthorized changes and ensure the integrity and availability of essential resources.
+	7.	Monitor and Audit Access:
+	•	Enable Azure AD logs, Azure Monitor, and Azure Security Center to monitor user access, authentication events, and resource activities.
+	•	Implement logging and auditing mechanisms to track changes to access permissions, detect suspicious behavior, and investigate security incidents.
+	8.	Regularly Review Access Controls:
+	•	Conduct periodic access reviews and assessments to evaluate the effectiveness of IAM controls, identify risks, and remediate issues.
+	•	Use Azure AD access reviews to review and recertify user access rights, group memberships, and application permissions to ensure compliance with security policies and regulatory requirements.
+
