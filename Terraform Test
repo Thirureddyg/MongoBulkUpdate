@@ -1,0 +1,25 @@
+There are several tools and frameworks available for implementing Test-Driven Development (TDD) in Terraform. Here are some commonly used ones:
+
+	1.	Terratest:
+	•	Terratest is a Go library that provides a framework for writing automated tests for Terraform code.
+	•	It allows you to write both unit tests and integration tests for Terraform configurations.
+	•	Terratest can deploy real infrastructure using Terraform and then validate the behavior of the deployed resources through automated tests.
+	2.	Terraform Mocking Frameworks:
+	•	Terraform itself provides built-in mocking capabilities for testing providers and modules.
+	•	By mocking provider responses and resources, you can simulate interactions with external dependencies during testing.
+	•	These capabilities allow you to isolate and test Terraform code without relying on real cloud resources.
+	3.	Tflint:
+	•	Tflint is a Terraform linting tool that analyzes Terraform configurations and identifies potential issues, errors, or best practice violations.
+	•	It performs static analysis of Terraform code to ensure adherence to coding standards and best practices.
+	•	Tflint can be integrated into CI/CD pipelines to enforce code quality and consistency automatically.
+	4.	Sentinel:
+	•	Sentinel is a policy-as-code framework integrated with Terraform Enterprise.
+	•	It allows you to define custom policies to enforce governance, security, and compliance requirements.
+	•	Sentinel policies can be evaluated during the Terraform plan and apply phases to prevent non-compliant changes from being deployed.
+	5.	GoMock (for Go developers):
+	•	GoMock is a mocking framework for Go that allows you to create mock objects and define behaviors for testing.
+	•	It can be used in conjunction with Terratest or other testing frameworks to mock external dependencies and simulate interactions during testing.
+	6.	Kitchen-Terraform:
+	•	Kitchen-Terraform is a testing framework that provides a test harness for Terraform configurations.
+	•	It allows you to write infrastructure tests in Ruby and execute them against real infrastructure.
+	•	Kitchen-Terraform supports various testing scenarios, including verifying resource provisioning, testing configuration changes, and validating infrastructure behavior.
